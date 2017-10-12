@@ -32,13 +32,18 @@ function isValidCard(cardNumber) {
   }
 }
 
-//Los datos ingresados en un prompt son siempre de tipo string
-var cardNumber = prompt("Ingrese su número de tarjeta: ");
+do {
+  var centinel = false;
+  //Los datos ingresados en un prompt son siempre de tipo string
+  var cardNumber = prompt("Ingrese su número de tarjeta: ");
 
-//Condiciono que el ingreso es de 16 digitos, además no sea un ingreso de 16 veces cero.
-if (cardNumber.length == 16 & cardNumber != 0000000000000000) {
-  ////Llamo a la funcion isValidCard tomando como argumento cardNumber
-  isValidCard(cardNumber);
-
-} else
-  document.write('Número de tarjeta NO válida');
+  //Condiciono que el ingreso es de 16 digitos, además no sea un ingreso de 16 veces cero.
+  if (cardNumber.length == 16 & cardNumber !== 0000000000000000) {
+    centinel = true;
+    //Llamo a la funcion isValidCard tomando como argumento cardNumber
+    isValidCard(cardNumber);
+    break;
+    //Si no se cumple la función. manda una alerta de que el ingreso no es válido y vuelve a pedir el número
+  } else
+    alert('Error. Ingreso no válido.');
+} while (centinel === false);
