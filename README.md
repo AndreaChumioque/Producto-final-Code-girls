@@ -5,12 +5,12 @@
 3. Explicación del código.
 
 
-- - - - - - -  --- - - - - - - - -- -
+--------------------------
 
 ### 1. DIAGRAMA DE FLUJO
 
 ![validcard](assets/docs/diagramaFlujoValidCard.jpeg)
-[diagramaflujo](https://ibb.co/dy78qb)
+[diagramaflujo](https://ibb.co/crgeFb)
 
 ### 2. PSEUDOCÓDIGO
 
@@ -19,89 +19,92 @@
 
       función isValidCard <--- (cardNumber)
 
-        // crear variables
+        Crear variables
         var arrayNumbers, arrayInverse, sum
 
-        //almaceno en la variable cada ejecución
+        Almaceno en la variable cada ejecución
         arrayNumbers <-- cardNumber.split('')
         arrayInverse <-- arrayNumbers.reverse()
         sum <-- 0
 
-      Para i == 0  Hasta i < longitudArrayNumbers Con Paso i++ Hacer
+        Bucle : Para i == 0  Hasta i < longitudArrayNumbers Con Paso i++ Hacer
         arrayInverse[i] <-- parseInt(arrayInverse[i])
 
           Si (i % 2 == 1) Entonces
-            arrayInverse[i] <--suma de digitos(multiplicar*2(indice impares))
+            arrayInverse[i] <--suma de digitos(multiplicar*2 (indices impares))
 
-    	   Fin Si
+          Fin Si
          sum <-- suma de digitos d ela tarjeta
 
-    	Fin Para
-      retornar sum % 10 == 0 ? true : false
-    FinProceso
+        Fin Bucle
 
-    llamar la funcion
-      isValidCard (cardNumber)
+        retornar sum % 10 == 0 ? true : false
+        Fin función
+
+    Fin Proceso
 
 --------------------------------------------
 
 ### 3. EXPLICACIÓN DEL CÓDIGO
 
-Nos pide válidar el número de tarjeta de crédito, utilizando el algoritmo de Luhn.
+Se nos pide hacer la validación de un número de tarjeta de crédito utilizando el algoritmo de Luhn.
 
-**Ingreso de dato**
+**Ingreso de datos**
 
-Aqui solicitamos el número de tarjeta, mediante un `prompt`, guardandolo en la variable cardNumber.
+Aquí solicitamos el número de tarjeta, mediante un `prompt`, y lo guardamos en la variable cardNumber.
 
 `var cardNumber = prompt ("Ingrese su número de tarjeta: ");`
 
 Ejemplo: cardNumber = '4975226157921705'
 
->  Ojo, al ingresar un dato en el prompt, este siempre es de tipo string, asi que el número de tarjeta ingresado, será de tipo string.
+>NOTA: Al ingresar un dato mediante prompt, este siempre es de tipo string, así que el número de tarjeta ingresado, será de tipo string.
 
-**Creamos la funcion isValidCard**
+**Creación de la función isValidCard**
 
 `function isValidCard(cardNumber){}`
 
-**Proceso para validar el numero**
+**Proceso para validar el número**
   
-* El string es convertido en un array con separacion de (''), con split: 
+* Convertimos el string en un array con separacion de (''), con el método split: 
 
 `var arrayNumbers = cardNumber.split('');`
 
-obteniendo: ['4', '9', '7', '5', '2', '2', '6', '1', '5', '7', '9', '2', '1', '7', '0', '5' ]
+Obteniendo: ['4', '9', '7', '5', '2', '2', '6', '1', '5', '7', '9', '2', '1', '7', '0', '5' ]
 
-* Para seguir con el algoritmo de Luhn, invertimos el array, con reverse():
+* Para seguir con el algoritmo de Luhn, invertimos el array, con `reverse()`:
 
 `var arrayInverse = arrayNumbers.reverse();`
 
-obteniendo: ['5', '0', '7', '1', '2', '9', '7', '5', '1', '6', '2', '2', '5', '7', '9', '4' ]
+Obteniendo: ['5', '0', '7', '1', '2', '9', '7', '5', '1', '6', '2', '2', '5', '7', '9', '4' ]
 
-* Creamos el acumulador suma para almacenar más adelante, la suma de digitos.
+* Creamos el acumulador suma para almacenar más adelante, la suma de dígitos.
 
 `var sum = 0;`
 
-* Ahora vamos a convertir los elementos del array tipo string a numbers. 
+* Ahora, vamos a convertir los elementos del array tipo string a tipo number.
 
 
-    for(var i = 0; i < arrayInverse.length; i++){
+       for(var i = 0; i < arrayInverse.length; i++{
         arrayInverse[i] = parseInt(arrayInverse[i]);
-    }
+       }
 
 Se obtendrá: [5, 0, 7, 1, 2, 9, 7, 5, 1, 6, 2, 2, 5, 7, 9, 4 ]
 
 * Debemos multiplicador x2 a las posiciones impares de nuestro array, teniendo encuenta que inicializamos con i = 0, para ello hacemos un if.
 
-* Despues debemos sumar los digitos de los resultos, es decir, si en mi posición i=5, obtengo un digito de dos cifras debo sumar 1 + 8, y como lo hacemos, separando el número asi:
+* Despues debemos sumar los dígitos de los resultados, es decir, si en mi posición i = 5, obtengo un dígito de dos cifras, por ejemplo, 18, debo sumar 1 + 8:
 
-18 / 10 = 1.8, con parseInt se obtendra 1
+* Aplicando parseInt obtenemos la parte entera: 
 
-18 MOD 10 = 8
+`18 / 10 = 1.8` &rarr;  `parseInt(18 / 10) = 1`
+
+* Aplicando MOD obtenemos el segundo dígito 
+
+`18 % 10 = 8`
 
 obteniendo los digitos separados
 
 En código será asi:
-
 
     if(i % 2 == 1){
       arrayInverse[i] = (parseInt((arrayInverse[i] * 2 )/ 10 )) + ((arrayInverse[i] * 2 ) % 10 );
@@ -112,7 +115,7 @@ OJO: Lo que ejecuta el IF será la suma de los digitos, almacenado en el mismo a
 
 * Debemos obtener la suma de digitos, para ellos utilizaremos nuestro acumulador sum, creado anteriormente
 
-          sum += arrayInverse[i];		
+      sum += arrayInverse[i];		
 
     dada como resultado sgunn nuestro ejemplo: 70
 
@@ -126,6 +129,6 @@ OJO: Lo que ejecuta el IF será la suma de los digitos, almacenado en el mismo a
 
       return sum % 10 == 0 ? document.write( true + ', su número de tarjeta es válido')  : document.write( false + ', su número de tarjeta NO es válido') ; 
 
-* Finalmente, no olvidar en llamar a la función.
+* Finalmente, no olvidar invocar la función.
 
       isValidCard (cardNumber);

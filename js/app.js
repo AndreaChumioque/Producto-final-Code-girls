@@ -5,6 +5,7 @@ function isValidCard(cardNumber) {
   var arrayInverse = arrayNumbers.reverse();
   //creo un acumulador suma, donde se almacenara las sumas de los digitos de la tarjeta
   var sum = 0;
+
   //Si cardNumber es un string vacío, aparece el mensaje 'Error campos vacío'
   if (cardNumber.length == 0)
     alert('Error campo vacio')
@@ -16,11 +17,11 @@ function isValidCard(cardNumber) {
       //condiciono un mod == 1, para que solo tomen los indices impares
       if (i % 2 == 1) {
         /*segun la validacón de tarjeta los indices impares (en mi caso porque tomo como inicializacion 
-            i = 0) debo multiplicarlo por dos, si el resultado de esa multiplicación me da un número de dos 
-            digitos, entonces debo sumar dichos digitos. Para obtener el PRIMER DIGITO, debo 
-            dividir el número entre 10 y mostrarlo con un parseInt y obtener solo solo la parte entera del 
-            resultado. Luego, para el SEGUNDO DIGITO, debo sacar MOD 10 del valor para obtener las unidades. 
-            Después, sumo dicho valores y el resultaado es alamacenado en el arrayInverse */
+        i = 0) debo multiplicarlo por dos, si el resultado de esa multiplicación me da un número de dos 
+        digitos, entonces debo sumar dichos digitos. Para obtener el PRIMER DIGITO, debo 
+        dividir el número entre 10 y mostrarlo con un parseInt y obtener solo solo la parte entera del 
+        resultado. Luego, para el SEGUNDO DIGITO, debo sacar MOD 10 del valor para obtener las unidades. 
+        Después, sumo dicho valores y el resultaado es alamacenado en el arrayInverse */
         arrayInverse[i] = (parseInt((arrayInverse[i] * 2) / 10)) + ((arrayInverse[i] * 2) % 10);
       }
       //Ahora sumare los elementos del array al acumulador sum para obtener un solo resultado.
@@ -34,5 +35,10 @@ function isValidCard(cardNumber) {
 //Los datos ingresados en un prompt son siempre de tipo string
 var cardNumber = prompt("Ingrese su número de tarjeta: ");
 
-//Llamo a la funcion isValidCard tomando como argumento cardNumber
-isValidCard(cardNumber);
+//Condiciono que el ingreso es de 16 digitos, además no sea un ingreso de 16 veces cero.
+if (cardNumber.length == 16 & cardNumber != 0000000000000000) {
+  ////Llamo a la funcion isValidCard tomando como argumento cardNumber
+  isValidCard(cardNumber);
+
+} else
+  document.write('Número de tarjeta NO válida');
