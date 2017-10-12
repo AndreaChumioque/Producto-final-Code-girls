@@ -67,19 +67,19 @@ Ejemplo: cardNumber = '4975226157921705'
   
 * Convertimos el string en un array con separacion de (''), con el método split: 
 
-`var arrayNumbers = cardNumber.split('');`
+  `var arrayNumbers = cardNumber.split('');`
 
-Obteniendo: ['4', '9', '7', '5', '2', '2', '6', '1', '5', '7', '9', '2', '1', '7', '0', '5' ]
+  Obteniendo: ['4', '9', '7', '5', '2', '2', '6', '1', '5', '7', '9', '2', '1', '7', '0', '5' ]
 
 * Para seguir con el algoritmo de Luhn, invertimos el array, con `reverse()`:
 
-`var arrayInverse = arrayNumbers.reverse();`
+  `var arrayInverse = arrayNumbers.reverse();`
 
-Obteniendo: ['5', '0', '7', '1', '2', '9', '7', '5', '1', '6', '2', '2', '5', '7', '9', '4' ]
+  Obteniendo: ['5', '0', '7', '1', '2', '9', '7', '5', '1', '6', '2', '2', '5', '7', '9', '4' ]
 
 * Creamos el acumulador suma para almacenar más adelante, la suma de dígitos.
 
-`var sum = 0;`
+  `var sum = 0;`
 
 * Ahora, vamos a convertir los elementos del array tipo string a tipo number.
 
@@ -88,46 +88,44 @@ Obteniendo: ['5', '0', '7', '1', '2', '9', '7', '5', '1', '6', '2', '2', '5', '7
         arrayInverse[i] = parseInt(arrayInverse[i]);
        }
 
-Se obtendrá: [5, 0, 7, 1, 2, 9, 7, 5, 1, 6, 2, 2, 5, 7, 9, 4 ]
+  Se obtendrá: [5, 0, 7, 1, 2, 9, 7, 5, 1, 6, 2, 2, 5, 7, 9, 4 ]
 
-* Debemos multiplicador x2 a las posiciones impares de nuestro array, teniendo encuenta que inicializamos con i = 0, para ello hacemos un if.
+* Debemos multiplicar x2 a las posiciones impares de nuestro array, teniendo encuenta que inicializamos con i = 0, para ello hacemos un if.
 
 * Despues debemos sumar los dígitos de los resultados, es decir, si en mi posición i = 5, obtengo un dígito de dos cifras, por ejemplo, 18, debo sumar 1 + 8:
 
 * Aplicando parseInt obtenemos la parte entera: 
 
-`18 / 10 = 1.8` &rarr;  `parseInt(18 / 10) = 1`
+  `18 / 10 = 1.8` &rarr;  `parseInt(18 / 10) = 1`
 
 * Aplicando MOD obtenemos el segundo dígito 
 
-`18 % 10 = 8`
+  `18 % 10 = 8`
 
-obteniendo los digitos separados
+* En código será asi:
 
-En código será asi:
-
-    if(i % 2 == 1){
+      if(i % 2 == 1){
       arrayInverse[i] = (parseInt((arrayInverse[i] * 2 )/ 10 )) + ((arrayInverse[i] * 2 ) % 10 );
-    }
+      }
 
-OJO: Lo que ejecuta el IF será la suma de los digitos, almacenado en el mismo array.
+>NOTA: Lo que ejecuta el IF será la suma de los digitos, almacenado en el mismo array.
 
 
-* Debemos obtener la suma de digitos, para ellos utilizaremos nuestro acumulador sum, creado anteriormente
+* Debemos obtener la suma de elementos, para ellos utilizaremos nuestro acumulador sum, creado anteriormente.
 
-      sum += arrayInverse[i];		
+      sum += arrayInverse[i];
 
-    dada como resultado sgunn nuestro ejemplo: 70
+    Dando como resultado, según nuestro ejemplo, 70.
 
-* Para validar si este número de tarjeta es correcta nuestra suma MOD 10 debe resulta 0
+* Para comprobar si este número de tarjeta es válido, y no una serie de número al azar, nuestra suma MOD 10 debe resultar 0.
 
       sum % 10 == 0
 										
-  Para este ejemplo 70 mod 10 = 0, es decir que nuestra tarjeta es válida.
+  Para este ejemplo `70 % 10 = 0`, es decir, nuestra tarjeta es válida.
 
-* Por último mostrar un document.write que indique si es TRUE o FALSE.		
+* Por último mostrar un document.write que indique el resultado de la validación.
 
-      return sum % 10 == 0 ? document.write( true + ', su número de tarjeta es válido')  : document.write( false + ', su número de tarjeta NO es válido') ; 
+      return sum % 10 == 0 ? document.write('Su número de tarjeta es válido')  : document.write('Su número de tarjeta NO es válido') ;
 
 * Finalmente, no olvidar invocar la función.
 
